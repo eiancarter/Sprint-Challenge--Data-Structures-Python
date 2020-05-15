@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BSTNode
 
 start_time = time.time()
 
@@ -13,14 +14,28 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
+
+# Step 1 - set the first index of names (either list) as the root node of a BST
+bst = BSTNode(names_1[0])
+
 for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+    bst.insert(name_1)
+for name_2 in names_2:
+    if bst.contains(name_2):
+        duplicates.append(name_2)
+
+# I have decoupled the lists so there are no longer any nested for loops, 
+# and I'm only traversing the bst and names_2 list once in order to check each value
+# so my time complexity is O(2N) or O(N). My space complexity is O(H), because worst
+# case I have to traverse the entire tree and I have an empty list duplicates which is also O(N)
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print (f"runtime: {end_time - start_time} seconds")
+
+
+
+##current runtime: 8.9 sec
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
