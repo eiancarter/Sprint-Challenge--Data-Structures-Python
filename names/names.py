@@ -15,14 +15,23 @@ duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
 
-# Step 1 - set the first index of names (either list) as the root node of a BST
+# Step 1 - set the first index of names (either list) as the root node of a BST 
 bst = BSTNode(names_1[0])
-
+## bst runtime is 0.14s
 for name_1 in names_1:
     bst.insert(name_1)
 for name_2 in names_2:
     if bst.contains(name_2):
         duplicates.append(name_2)
+
+## easier preferred method using set() runtime of 0.005s because a set is constant look up time
+# therefore - O(n) time and O(n) space
+# set_names_1 = set(names_1)
+# for name_2 in names_2:
+#     if name_2 in set_names_1:
+#         duplicates.append(name_2)
+        
+
 
 # I have decoupled the lists so there are no longer any nested for loops, 
 # and I'm only traversing the bst and names_2 list once in order to check each value
